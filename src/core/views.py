@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class Test_view(APIView):
     #to set authentication to the API
+    #FOR MORE AUTH METHODS CHECK THE DOCUMENTATION OF django-rest-auth & django-rest-knox 
     permission_classes = (IsAuthenticated, )
     # in the get method we need a query set and pass it to the serializer and in the arguments
     # in case of getting more than one instance we need to set set many = True
