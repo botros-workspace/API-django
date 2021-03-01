@@ -5,15 +5,18 @@ from .models import Post
 #third party imports
 from rest_framework.response import Response 
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 class Test_view(APIView):
+    #to set authentication to the API
+    permission_classes = (IsAuthenticated, )
     # in the get method we need a query set and pass it to the serializer and in the arguments
     # in case of getting more than one instance we need to set set many = True
     def get(self, request, *args, **kwargs):
         qs = Post.objects.all()
         serializer = PostSerializer(qs, many = True)
         return Response(serializer.data)
-
+    # in the post method we need to check if the data is valid and then we can save it 
     def post(self, request, *args, **kwargs):
         serializer = PostSerializer(data = request.data)
         if serializer.is_valid():
